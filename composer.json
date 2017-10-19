@@ -1,0 +1,31 @@
+{
+    "name": "adhocore/php-polyfills",
+    "description": "Miscellaneous polyfills for older PHP versions",
+    "keywords": ["php", "polyfill", "legacy"],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jitendra Adhikari",
+            "email": "jiten.adhikary@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ahc\\": "src/"
+        },
+        "files": [
+            "src/polyfill.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ahc\\Tests\\": "tests/"
+        }
+    }
+}
