@@ -1,4 +1,4 @@
-# adhocore/php-polyfills
+# adhocore/php-polyfills [![build status](https://travis-ci.org/adhocore/php-polyfills.svg?branch=master)](https://travis-ci.org/adhocore/php-polyfills)
 
 Miscellaneous polyfills for older PHP versions. This library should run on any PHP5 versions or later
 
