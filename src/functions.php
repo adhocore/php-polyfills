@@ -41,7 +41,7 @@ function array_column($array, $columnKey, $indexKey = null)
         if (null !== $indexKey) {
             if (\is_array($value) && \array_key_exists($indexKey, $value)) {
                 $key = $value[$indexKey];
-            } elseif (array_key_exists($indexKey, $objectVars) || isset($value->{$indexKey})) {
+            } elseif (\array_key_exists($indexKey, $objectVars) || isset($value->{$indexKey})) {
                 $key = $value->{$indexKey};
             }
         }
