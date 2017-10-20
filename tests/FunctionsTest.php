@@ -12,6 +12,39 @@ class FunctionsTest extends PHPUnit\Framework\TestCase
         );
     }
 
+    /**
+     * @expectedException \PHPUnit\Framework\Error\Warning
+     * @expectedExceptionMessage array_column() expects parameter 1 to be array
+     */
+    public function test_array_column_invalid_param1()
+    {
+        $this->assertNull(@\Ahc\array_column('a', null));
+
+        \Ahc\array_column(null, null);
+    }
+
+    /**
+     * @expectedException \PHPUnit\Framework\Error\Warning
+     * @expectedExceptionMessage array_column() expects parameter 2 to be number/string/null
+     */
+    public function test_array_column_invalid_param2()
+    {
+        $this->assertNull(@\Ahc\array_column([], new DateTime));
+
+        \Ahc\array_column([], new stdClass);
+    }
+
+    /**
+     * @expectedException \PHPUnit\Framework\Error\Warning
+     * @expectedExceptionMessage array_column() expects parameter 3 to be number/string/null
+     */
+    public function test_array_column_invalid_param3()
+    {
+        $this->assertNull(@\Ahc\array_column([], null, new DateTime));
+
+        \Ahc\array_column([], null, new stdClass);
+    }
+
     public function array_column_data()
     {
         return \array_column([[

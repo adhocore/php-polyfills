@@ -8,39 +8,29 @@ function array_column($array, $columnKey, $indexKey = null)
 {
     $result = array();
 
-    if (\is_object($columnKey) && \method_exists($columnKey, '__toString')) {
-        $columnKey = (string) $columnKey;
-    }
-
-    if (\is_object($indexKey) && \method_exists($indexKey, '__toString')) {
-        $indexKey = (string) $indexKey;
-    }
-
-    // @codeCoverageIgnoreStart 
     if (!\is_array($array)) {
         \trigger_error('array_column() expects parameter 1 to be array', E_USER_WARNING);
 
-        return $result;
+        return null;
     }
 
-    if ($columnKey !== null && !\is_scalar($columnKey)) {
-        \trigger_error('array_column() expects parameter 2 to be number/string/null', E_USER_WARNING);
+    if (null !== $columnKey) {
+        if (\is_object($columnKey) && !\method_exists($columnKey, '__toString')) {
+            \trigger_error('array_column() expects parameter 2 to be number/string/null', E_USER_WARNING);
 
-        return $result;
-    }
+            return null;
+        }
 
-    if ($indexKey !== null && !\is_scalar($indexKey)) {
-        \trigger_error('array_column() expects parameter 2 to be number/string/null', E_USER_WARNING);
-
-        return $result;
-    }
-    // @codeCoverageIgnoreEnd
-
-    if ($columnKey !== null && !\is_int($columnKey)) {
         $columnKey = \is_float($columnKey) ? (int) $columnKey : (string) $columnKey;
     }
 
-    if ($indexKey !== null && !\is_int($indexKey)) {
+    if (null !== $indexKey) {
+        if (\is_object($indexKey) && !\method_exists($indexKey, '__toString')) {
+            \trigger_error('array_column() expects parameter 3 to be number/string/null', E_USER_WARNING);
+
+            return null;
+        }
+
         $indexKey = \is_float($indexKey) ? (int) $indexKey : (string) $indexKey;
     }
 
@@ -51,7 +41,7 @@ function array_column($array, $columnKey, $indexKey = null)
         if (null !== $indexKey) {
             if (\is_array($value) && \array_key_exists($indexKey, $value)) {
                 $key = $value[$indexKey];
-            } elseif (array_key_exists($indexKey, $objectVars) || isset($value->{$indexKey})) {
+            } elseif (\array_key_exists($indexKey, $objectVars) || isset($value->{$indexKey})) {
                 $key = $value->{$indexKey};
             }
         }
