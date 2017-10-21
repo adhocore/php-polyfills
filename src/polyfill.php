@@ -17,3 +17,27 @@ if (!function_exists('array_column')) {
     }
 }
 }
+
+/*
+ * ------
+ * PHP5.4
+ * ------
+ */
+if (PHP_VERSION_ID < 50400) {
+require_once __DIR__ . '/php54functions.php';
+
+if (!function_exists('hex2bin')) {
+    function hex2bin($hexString)
+    {
+        return \Ahc\hex2bin($hexString);
+    }
+}
+
+if (!function_exists('http_response_code')) {
+    function http_response_code($responseCode = null)
+    {
+        return \Ahc\http_response_code($responseCode);
+    }
+}
+
+}
