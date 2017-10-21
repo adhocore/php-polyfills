@@ -94,3 +94,30 @@ function status_codes()
         599 => 'Network connect timeout error',
     );
 }
+
+function http_response_code($responseCode = null)
+{
+    // Based on http://php.net/manual/en/function.http-response-code.php#107261
+
+    static $recentCode  = 200;
+
+    if (null === $responseCode) {
+        return $recentCode;
+    }
+
+    if (!\is_int($responseCode)) {
+        \trigger_error('http_response_code() expects parameter 1 to be integer', E_USER_WARNING);
+
+        return null;
+    }
+
+    $statusCodes   = status_codes();
+    $protocol      = isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
+    $toReturn      = $recentCode;
+    $statusMessage = isset($statusCodes[$responseCode]) ? ' ' . $statusCodes[$responseCode] : '';
+
+    \header("{$protocol} {$responseCode}{$statusMessage}");
+    $recentCode    = $responseCode;
+
+    return $toReturn;
+}
