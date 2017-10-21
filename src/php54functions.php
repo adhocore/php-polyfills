@@ -9,7 +9,17 @@ function hex2bin($hexString)
 {
     // Based on http://php.net/manual/en/function.hex2bin.php#105601
 
-    // @todo: validate input.
+    if (\strlen($hexString) % 2) {
+        \trigger_error('hex2bin(): Hexadecimal input string must have an even length', E_USER_WARNING);
+
+        return false;
+    }
+
+    if (!\preg_match('/^[a-f0-9]+$/i', $hexString)) {
+        \trigger_error('hex2bin(): Input string must be hexadecimal string', E_USER_WARNING);
+
+        return false;
+    }
 
     return \pack('H*', $hexString);
 }
