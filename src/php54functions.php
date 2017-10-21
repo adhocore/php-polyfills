@@ -109,16 +109,31 @@ function http_response_code($responseCode = null)
 {
     // Based on http://php.net/manual/en/function.http-response-code.php#107261
 
-    static $recentCode  = 200;
+    static $recentCode = null;
 
-    if (null === $responseCode) {
-        return $recentCode;
-    }
-
-    if (!\is_int($responseCode)) {
+    if (null !== $responseCode && !\is_int($responseCode)) {
         \trigger_error('http_response_code() expects parameter 1 to be integer', E_USER_WARNING);
 
         return null;
+    }
+
+    if (PHP_SAPI === 'cli') {
+        if (!$responseCode) {
+            return $recentCode ? $recentCode : false;
+        }
+
+        $toReturn   = $recentCode;
+        $recentCode = $responseCode;
+
+        if (!$toReturn) {
+            return true;
+        }
+
+        return $toReturn;
+    }
+
+    if (!$responseCode) {
+        return $recentCode ? $recentCode : 200;
     }
 
     $statusCodes   = status_codes();
@@ -129,5 +144,5 @@ function http_response_code($responseCode = null)
     \header("{$protocol} {$responseCode}{$statusMessage}");
     $recentCode    = $responseCode;
 
-    return $toReturn;
+    return $toReturn ? $toReturn : 200;
 }
