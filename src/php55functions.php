@@ -1,6 +1,6 @@
 <?php
 
-// Define polyfills in local scope.
+// Define PHP5.5 polyfills in local scope.
 
 namespace Ahc;
 

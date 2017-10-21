@@ -1,6 +1,6 @@
 <?php
 
-class FunctionsTest extends PHPUnit\Framework\TestCase
+class Php55FunctionsTest extends PHPUnit\Framework\TestCase
 {
     /** @dataProvider array_column_data */
     public function test_array_column($message, ...$parameters)
