@@ -27,7 +27,7 @@ function hex2bin($hexString)
 /** @internal */
 function status_codes()
 {
-    return array(
+    return [
         100 => 'Continue',
         101 => 'Switching Protocols',
         102 => 'Processing',
@@ -102,7 +102,7 @@ function status_codes()
         511 => 'Network Authentication Required',
         598 => 'Network read timeout error',
         599 => 'Network connect timeout error',
-    );
+    ];
 }
 
 function http_response_code($responseCode = null)
