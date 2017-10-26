@@ -6,8 +6,8 @@ class Php55FunctionsTest extends PHPUnit\Framework\TestCase
     public function test_array_column($message, ...$parameters)
     {
         $this->assertEquals(
-            \array_column(...$parameters),     # expected = native   implementation
-            \Ahc\array_column(...$parameters), # actual   = userland implementation
+            \array_column(...$parameters),     // expected = native   implementation
+            \Ahc\array_column(...$parameters), // actual   = userland implementation
             $message
         );
     }
@@ -54,7 +54,7 @@ class Php55FunctionsTest extends PHPUnit\Framework\TestCase
             'indexKey'  => null,
         ], [
             'message'   => 'array of object, null columnKey, null indexKey',
-            'array'     => [(object)['a' => 1, 'b' => 1], (object)['a' => 2, 'b' => 2]],
+            'array'     => [(object) ['a' => 1, 'b' => 1], (object) ['a' => 2, 'b' => 2]],
             'columnKey' => null,
             'indexKey'  => null,
         ], [
@@ -64,7 +64,7 @@ class Php55FunctionsTest extends PHPUnit\Framework\TestCase
             'indexKey'  => 'a',
         ], [
             'message'   => 'array of object, null columnKey, string indexKey',
-            'array'     => [(object)['a' => 1, 'b' => 1], (object)['a' => 2, 'b' => 2]],
+            'array'     => [(object) ['a' => 1, 'b' => 1], (object) ['a' => 2, 'b' => 2]],
             'columnKey' => null,
             'indexKey'  => 'a',
         ], [
@@ -74,7 +74,7 @@ class Php55FunctionsTest extends PHPUnit\Framework\TestCase
             'indexKey'  => 1,
         ], [
             'message'   => 'array of object, null columnKey, integer indexKey',
-            'array'     => [(object)['a' => 1, 5 => 1], (object)['a' => 2, 5 => 2]],
+            'array'     => [(object) ['a' => 1, 5 => 1], (object) ['a' => 2, 5 => 2]],
             'columnKey' => null,
             'indexKey'  => 1,
         ], [
@@ -84,7 +84,7 @@ class Php55FunctionsTest extends PHPUnit\Framework\TestCase
             'indexKey'  => 'non-existent',
         ], [
             'message'   => 'array of object, null columnKey, non existent indexKey',
-            'array'     => [(object)['a' => 1, 10.5 => 1], (object)['a' => 2, 10.5 => 2]],
+            'array'     => [(object) ['a' => 1, 10.5 => 1], (object) ['a' => 2, 10.5 => 2]],
             'columnKey' => null,
             'indexKey'  => 'non-existent',
         ], [
@@ -94,7 +94,7 @@ class Php55FunctionsTest extends PHPUnit\Framework\TestCase
             'indexKey'  => 'partial-existent',
         ], [
             'message'   => 'array of object, null columnKey, partial-existent indexKey',
-            'array'     => [(object)['a' => 1, 10.5 => 1], (object)['a' => 2, 'partial-existent' => 2]],
+            'array'     => [(object) ['a' => 1, 10.5 => 1], (object) ['a' => 2, 'partial-existent' => 2]],
             'columnKey' => null,
             'indexKey'  => 'partial-existent',
         ], [
@@ -104,7 +104,7 @@ class Php55FunctionsTest extends PHPUnit\Framework\TestCase
             'indexKey'  => null,
         ], [
             'message'   => 'array of object, string columnKey, null indexKey',
-            'array'     => [(object)['a' => 1, 'b' => 1], (object)['a' => 2, 'b' => 2]],
+            'array'     => [(object) ['a' => 1, 'b' => 1], (object) ['a' => 2, 'b' => 2]],
             'columnKey' => 'a',
             'indexKey'  => null,
         ], [
@@ -114,7 +114,7 @@ class Php55FunctionsTest extends PHPUnit\Framework\TestCase
             'indexKey'  => null,
         ], [
             'message'   => 'array of object, integer columnKey, null indexKey',
-            'array'     => [(object)['a' => 1, 5 => 1], (object)['a' => 2, 5 => 2]],
+            'array'     => [(object) ['a' => 1, 5 => 1], (object) ['a' => 2, 5 => 2]],
             'columnKey' => 1,
             'indexKey'  => null,
         ], [
@@ -124,7 +124,7 @@ class Php55FunctionsTest extends PHPUnit\Framework\TestCase
             'indexKey'  => null,
         ], [
             'message'   => 'array of object, non-existent columnKey, null indexKey',
-            'array'     => [(object)['a' => 1, 10.5 => 1], (object)['a' => 2, 10.5 => 2]],
+            'array'     => [(object) ['a' => 1, 10.5 => 1], (object) ['a' => 2, 10.5 => 2]],
             'columnKey' => 'non-existent',
             'indexKey'  => null,
         ], [
@@ -134,24 +134,50 @@ class Php55FunctionsTest extends PHPUnit\Framework\TestCase
             'indexKey'  => null,
         ], [
             'message'   => 'array of object, partial-existent columnKey, null indexKey',
-            'array'     => [(object)['a' => 1, 10.5 => 1], (object)['a' => 2, 'partial-existent' => 2]],
+            'array'     => [(object) ['a' => 1, 10.5 => 1], (object) ['a' => 2, 'partial-existent' => 2]],
             'columnKey' => 'partial-existent',
             'indexKey'  => null,
         ], [
             'message'   => 'array of array, object columnKey, object indexKey',
             'array'     => [['a' => 1, 'b' => 1], ['a' => 2, 'b' => 2]],
-            'columnKey' => new class { function __toString() { return 'a'; } },
-            'indexKey'  => new class { function __toString() { return 'b'; } },
+            'columnKey' => new class {
+                public function __toString()
+                {
+                    return 'a';
+                }
+            },
+            'indexKey'  => new class {
+                public function __toString()
+                {
+                    return 'b';
+                }
+            },
         ], [
             'message'   => 'array of object, object columnKey, object indexKey',
-            'array'     => [(object)['a' => 1, 'b' => 1], (object)['a' => 2, 'b' => 2]],
-            'columnKey' => new class { function __toString() { return 'a'; } },
-            'indexKey'  => new class { function __toString() { return 'b'; } },
+            'array'     => [(object) ['a' => 1, 'b' => 1], (object) ['a' => 2, 'b' => 2]],
+            'columnKey' => new class {
+                public function __toString()
+                {
+                    return 'a';
+                }
+            },
+            'indexKey'  => new class {
+                public function __toString()
+                {
+                    return 'b';
+                }
+            },
         ], [
             'message'   => 'array of real object, string columnKey, string indexKey',
             'array'     => [
-                new class { public $a = 1; public $b = 1; },
-                new class { public $a = 2; public $b = 2; },
+                new class {
+                    public $a = 1;
+                    public $b = 1;
+                },
+                new class {
+                    public $a = 2;
+                    public $b = 2;
+                },
             ],
             'columnKey' => 'a',
             'indexKey'  => 'b',
