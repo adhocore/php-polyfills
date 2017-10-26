@@ -6,8 +6,8 @@ class Php54FunctionsTest extends PHPUnit\Framework\TestCase
     public function test_hex2bin($message, $hexString)
     {
         $this->assertEquals(
-            \hex2bin($hexString),     # expected = native   implementation
-            \Ahc\hex2bin($hexString), # actual   = userland implementation
+            \hex2bin($hexString),     // expected = native   implementation
+            \Ahc\hex2bin($hexString), // actual   = userland implementation
             $message
         );
     }
@@ -38,8 +38,8 @@ class Php54FunctionsTest extends PHPUnit\Framework\TestCase
     public function test_http_response_code($message, $responseCode)
     {
         $this->assertEquals(
-            \http_response_code($responseCode),     # expected = native   implementation
-            \Ahc\http_response_code($responseCode), # actual   = userland implementation
+            \http_response_code($responseCode),     // expected = native   implementation
+            \Ahc\http_response_code($responseCode), // actual   = userland implementation
             $message
         );
     }
