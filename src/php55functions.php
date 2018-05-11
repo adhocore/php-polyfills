@@ -6,7 +6,7 @@ namespace Ahc;
 
 function array_column($array, $columnKey, $indexKey = null)
 {
-    $result = [];
+    $result = array();
 
     if (!\is_array($array)) {
         \trigger_error('array_column() expects parameter 1 to be array', E_USER_WARNING);
@@ -35,7 +35,7 @@ function array_column($array, $columnKey, $indexKey = null)
     }
 
     foreach ($array as $value) {
-        $objectVars = \is_object($value) ? \get_object_vars($value) : [];
+        $objectVars = \is_object($value) ? \get_object_vars($value) : array();
 
         $key = null;
         if (null !== $indexKey) {
