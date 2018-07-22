@@ -1,6 +1,10 @@
 <?php
 
-class Php55FunctionsTest extends PHPUnit\Framework\TestCase
+namespace Ahc\Tests;
+
+use PHPUnit\Framework\TestCase;
+
+class Php55FunctionsTest extends TestCase
 {
     /** @dataProvider array_column_data */
     public function test_array_column($message, ...$parameters)
@@ -29,9 +33,9 @@ class Php55FunctionsTest extends PHPUnit\Framework\TestCase
      */
     public function test_array_column_invalid_param2()
     {
-        $this->assertNull(@\Ahc\array_column([], new DateTime));
+        $this->assertNull(@\Ahc\array_column([], new \DateTime));
 
-        \Ahc\array_column([], new stdClass);
+        \Ahc\array_column([], new \stdClass);
     }
 
     /**
@@ -40,9 +44,9 @@ class Php55FunctionsTest extends PHPUnit\Framework\TestCase
      */
     public function test_array_column_invalid_param3()
     {
-        $this->assertNull(@\Ahc\array_column([], null, new DateTime));
+        $this->assertNull(@\Ahc\array_column([], null, new \DateTime));
 
-        \Ahc\array_column([], null, new stdClass);
+        \Ahc\array_column([], null, new \stdClass);
     }
 
     public function array_column_data()
