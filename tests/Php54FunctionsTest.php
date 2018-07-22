@@ -1,7 +1,32 @@
 <?php
 
-class Php54FunctionsTest extends PHPUnit\Framework\TestCase
+namespace Ahc\Tests;
+
+use PHPUnit\Framework\TestCase;
+
+class Php54FunctionsTest extends TestCase
 {
+    private $errors;
+
+    public function errorHandler($errno, $errstr, $errfile, $errline, $errcontext)
+    {
+        $this->errors[] = compact('errno', 'errstr', 'errfile',
+            'errline', 'errcontext');
+    }
+
+    public function assertError($errstr, $errno)
+    {
+        foreach ($this->errors as $error) {
+            if ($error['errstr'] === $errstr
+                && $error['errno'] === $errno) {
+                return;
+            }
+        }
+        $this->fail('Error with level ' . $errno .
+            " and message '" . $errstr . "' not found in ",
+            var_export($this->errors, true));
+    }
+
     /** @dataProvider hex2bin_data */
     public function test_hex2bin($message, $hexString)
     {
@@ -42,6 +67,17 @@ class Php54FunctionsTest extends PHPUnit\Framework\TestCase
             \Ahc\http_response_code($responseCode), // actual   = userland implementation
             $message
         );
+    }
+
+    public function test_http_response_code_with_invalid_code()
+    {
+        $this->errors = [];
+        set_error_handler([$this, 'errorHandler']);
+
+        $result = \Ahc\http_response_code('invalid_code');
+
+        $this->assertError('http_response_code() expects parameter 1 to be integer', E_USER_WARNING);
+        $this->assertNull($result);
     }
 
     public function hex2bin_data()
