@@ -13,7 +13,7 @@
     "require": {
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.5 || ^8.0"
+        "phpunit/phpunit": "^6.5 || ^8.0 || ^9.0"
     },
     "autoload": {
         "psr-4": {
